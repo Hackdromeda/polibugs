@@ -10,17 +10,23 @@ def index():
         return render_template('index.html')
     elif request.method == 'POST':
         websiteAddress = str(request.form['websiteAddress'])
-        if websiteAddress[0:8] == 'http://' or websiteAddress[0:9] == 'https://':
+        if websiteAddress[0:7] == 'http://':
+            page = requests.get(websiteAddress)
+        elif websiteAddress[0:8] == 'https://':
             page = requests.get(websiteAddress)
         else: 
             websiteAddress = 'http://' + websiteAddress
-        page = requests.get(websiteAddress)
+            page = requests.get(websiteAddress)
         tree = html.fromstring(page.content)
         title = str(tree.xpath('//title/text()'))
         title = title.replace("['", '')
         title = title.replace("']", '')
+        title = title.replace("',", '')
+        title = title.replace("'", '')
         paragraphs = str(tree.xpath('//p/text()'))
         paragraphs = paragraphs.replace("['", '')
         paragraphs = paragraphs.replace("']", '')
+        paragraphs = paragraphs.replace("',", '')
+        paragraphs = paragraphs.replace("'", '')
         
-        return render_template('index.html', websiteAddress=paragraphs)
+        return render_template('evaluation.html', websiteAddress=paragraphs)

@@ -9,27 +9,32 @@
   <body>
     <nav class="navbar" style="background-color: #311B92; color: #ffffff;"><span></span><span class="navbar-brand mb-0 h1">Polibugs</span><span></span></nav>
     <div class="jumbotron jumbotron-fluid" style="background-color: #ffffff; text-align: center;">
-        <h1 class="display-4"><span style="color: #004D40">Nonpartisan </span>Political <strong>Debugger</strong></h1>
+        <h1 class="display-3" id="jumbotronTitle"><strong>Searching for Political <span style="color: #9b0000">Bugs.</span></strong></h1>
         <p class="lead">Mission Statement: We strive to provide a nonpartisan tool to analyze political bias.</p>
         <hr />
+        {{websiteAddress}}
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col"></div>
-            <div class="col">
-                <form action="{{url_for('index')}}" method="POST">
-                    <div class="form-group">
-                        <label for="websiteAddress">Website</label>
-                        <input class="form-control" name="websiteAddress" placeholder="Enter website URL">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Evaluate</button>
-                </form>
-            </div>
-            <div class="col"></div>
-        </div>
-    </div>
+    <script>
+        var jumbotronTitle = document.getElementById('jumbotronTitle');
+        setInterval(function() {
+            switch (jumbotronTitle.textContent) {
+                case "Searching for Political Bugs.":
+                    jumbotronTitle.textContent = "Nonpartisan Analysis.";
+                    break;
+                case "Nonpartisan Analysis.":
+                    jumbotronTitle.textContent = "Political Debugger.";
+                    break;
+                case "Political Debugger.":
+                    jumbotronTitle.textContent = "Powered By Polibugs.";
+                    break;
+                case "Powered By Polibugs.":
+                    jumbotronTitle.textContent = "Searching for Political Bugs.";
+                    break;
+            }
+        }, 4000)
+    </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+    </body>
 </html>

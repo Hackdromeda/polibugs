@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    requests.encoding = 'ISO-8859-1'
     if request.method == 'GET':
         return render_template('index.html')
     elif request.method == 'POST':
@@ -20,12 +21,16 @@ def index():
         tree = html.fromstring(page.content)
         title = str(tree.xpath('//title/text()'))
         title = title.replace("['", '')
+        title = title.replace('["', '')
         title = title.replace("']", '')
+        title = title.replace('"]', '')
         title = title.replace("',", '')
         title = title.replace("'", '')
         paragraphs = str(tree.xpath('//p/text()'))
         paragraphs = paragraphs.replace("['", '')
+        paragraphs = paragraphs.replace('["', '')
         paragraphs = paragraphs.replace("']", '')
+        paragraphs = paragraphs.replace('"]', '')
         paragraphs = paragraphs.replace("',", '')
         paragraphs = paragraphs.replace("'", '')
         

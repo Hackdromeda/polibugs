@@ -12,5 +12,15 @@ def index():
         websiteAddress = str(request.form['websiteAddress'])
         if websiteAddress[0:8] == 'http://' or websiteAddress[0:9] == 'https://':
             page = requests.get(websiteAddress)
-            tree = html.fromstring(page.content)
-            return render_template('index.html', websiteAddress=websiteAddress)
+        else: 
+            websiteAddress = 'http://' + websiteAddress
+        page = requests.get(websiteAddress)
+        tree = html.fromstring(page.content)
+        title = str(tree.xpath('//title/text()'))
+        title = title.replace("['", '')
+        title = title.replace("']", '')
+        paragraphs = str(tree.xpath('//p/text()'))
+        paragraphs = paragraphs.replace("['", '')
+        paragraphs = paragraphs.replace("']", '')
+        
+        return render_template('index.html', websiteAddress=paragraphs)

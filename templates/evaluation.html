@@ -13,7 +13,7 @@
     <nav class="navbar" style="background-color: #311B92; color: #ffffff;"><span></span><span class="navbar-brand mb-0 h1">Polibugs</span><span></span></nav>
     <div class="jumbotron jumbotron-fluid" style="background-color: #ffffff; text-align: center;">
         <h1 class="display-3" id="jumbotronTitle"><strong>De<span style="color: #9b0000;">partisan</span>izing</strong></h1>
-        <p class="lead">Mission Statement: We strive to provide a nonpartisan tool to analyze political bias.</p>
+        <p class="lead">Mission Statement: We strive to provide a nonpartisan tool to provide balanced viewpoints on the news.</p>
         <hr />
     </div>
     <div class="container">
@@ -31,19 +31,26 @@
     </div>
     <script>
         var websiteLean = "{{ websiteLean }}";
+        var yourTitle = "{{ title }}"
+        var yourWebsiteAddress = extractRootDomain("{{ websiteAddress }}");
         switch(websiteLean) {
             case 'conservative':
                 ajaxCall("wsj.com", "{{ topic }}", "leftWingArticles");
                 ajaxCall("apnews.com", "{{ topic }}", "centristArticles");
                 yourArt("rightWingArticles", "{{ topic }}")
+                ajaxCall(yourWebsiteAddress, yourTitle, "rightWingArticles")
                 break;
             case 'centrist':
                 ajaxCall("msnbc.com", "{{ topic }}", "leftWingArticles");
-                ajaxCall("foxnews.com", "{{ topic }}", "rightWingArticles")   
+                ajaxCall("foxnews.com", "{{ topic }}", "rightWingArticles") 
+                ajaxCall("{{ websiteAddress }}", "{{ title }}", "centristArticles")
+                //yourArt("centristArticles", "{{ topic }}")  
                 break;
             case 'liberal':
                 ajaxCall("apnews.com", "{{ topic }}", "centristArticles");
-                ajaxCall("foxnews.com", "{{ topic }}", "rightWingArticles")         
+                ajaxCall("foxnews.com", "{{ topic }}", "rightWingArticles")
+                ajaxCall("{{ websiteAddress }}", "{{ title }}", "leftWingArticles")
+                //yourArt("leftWingArticles", "{{ topic }}")          
                 break;
             case 'other':
                 ajaxCall("msnbc.com", "{{ topic }}", "leftWingArticles");
@@ -66,13 +73,12 @@
                 }
         });
         }
-
         function processData(data, location) {
             var articleItems = [];
 
             var x = 2;
             if(data.articles.length < 2){
-                x =  data.articles.length;
+                x = data.articles.length;
             }
 
             for (var i = 0; i < x; i++) {
@@ -128,6 +134,43 @@
             yourElement.innerText = 'Your article on: ' + title;
             document.getElementById(location).append(yourElement);
         }
+
+    function extractHostname(url) {
+        var hostname;
+        //find & remove protocol (http, ftp, etc.) and get hostname
+
+        if (url.indexOf("://") > -1) {
+            hostname = url.split('/')[2];
+        }
+        else {
+            hostname = url.split('/')[0];
+        }
+
+        //find & remove port number
+        hostname = hostname.split(':')[0];
+        //find & remove "?"
+        hostname = hostname.split('?')[0];
+
+        return hostname;
+    }
+
+    function extractRootDomain(url) {
+        var domain = extractHostname(url),
+            splitArr = domain.split('.'),
+            arrLen = splitArr.length;
+
+        //extracting the root domain here
+        //if there is a subdomain 
+        if (arrLen > 2) {
+            domain = splitArr[arrLen - 2] + '.' + splitArr[arrLen - 1];
+            //check to see if it's using a Country Code Top Level Domain (ccTLD) (i.e. ".me.uk")
+            if (splitArr[arrLen - 1].length == 2 && splitArr[arrLen - 1].length == 2) {
+                //this is using a ccTLD
+                domain = splitArr[arrLen - 3] + '.' + domain;
+            }
+        }
+        return domain;
+    }
     </script>
     </body>
 </html>

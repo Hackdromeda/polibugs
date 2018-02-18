@@ -28,7 +28,7 @@ def index():
         else:
             websiteLean = 'other'
 
-        """if websiteAddress[0:7] == 'http://':
+        if websiteAddress[0:7] == 'http://':
             page = requests.get(websiteAddress)
         elif websiteAddress[0:8] == 'https://':
             page = requests.get(websiteAddress)
@@ -44,6 +44,6 @@ def index():
         title = title.replace("',", '')
         title = title.replace("'", '')
         title = title.replace(' ', '%20')
-        title = title.replace('|', '%20')"""
+        title = title.replace('|', '%20')
 
-        return render_template('evaluation.html', topic=topic, websiteLean=websiteLean)
+        return render_template('evaluation.html', topic=topic, websiteLean=websiteLean, title=title, websiteAddress=websiteAddress)

@@ -69,31 +69,45 @@
    
         switch(websiteLean) {
             case 'conservative':
-                for (var l = 0; l < supportLiberal.length; l++) {
+                for (let l = 0; l < supportLiberal.length; l++) {
                     ajaxCall(supportLiberal[l], "{{ topic }}", "leftWingArticles");
                 }
-                for (var c = 0; c < supportCentrist.length; c++) {
+                for (let c = 0; c < supportCentrist.length; c++) {
                     ajaxCall(supportCentrist[c], "{{ topic }}", "centristArticles");
                 }
                 yourArt("rightWingArticles", "{{ topic }}");
                 ajaxCall(yourWebsiteAddress, yourTitle, "rightWingArticles");
                 break;
             case 'centrist':
-                ajaxCall("msnbc.com", "{{ topic }}", "leftWingArticles");
-                ajaxCall("foxnews.com", "{{ topic }}", "rightWingArticles"); 
+                for (let l = 0; l < supportLiberal.length; l++) {
+                    ajaxCall(supportLiberal[l], "{{ topic }}", "leftWingArticles");
+                }
+                for (let r = 0; r < supportConservative.length; r++) {
+                    ajaxCall(supportConservative[r], "{{ topic }}", "rightWingArticles");
+                }
                 yourArt("centristArticles", "{{ topic }}")
-                ajaxCall("{{ websiteAddress }}", "{{ title }}", "centristArticles"); 
+                ajaxCall("{{ websiteAddress }}", "{{ title }}", "centristArticles");
                 break;
             case 'liberal':
-                ajaxCall("thehill.com", "{{ topic }}", "centristArticles");
-                ajaxCall("foxnews.com", "{{ topic }}", "rightWingArticles");
-                yourArt("leftWingArticles", "{{ topic }}")  
-                ajaxCall("{{ websiteAddress }}", "{{ title }}", "leftWingArticles");        
+                for (let c = 0; c < supportCentrist.length; c++) {
+                    ajaxCall(supportCentrist[c], "{{ topic }}", "centristArticles");
+                }
+                for (let r = 0; r < supportConservative.length; r++) {
+                    ajaxCall(supportConservative[r], "{{ topic }}", "rightWingArticles");
+                }
+                yourArt("leftWingArticles", "{{ topic }}")
+                ajaxCall("{{ websiteAddress }}", "{{ title }}", "leftWingArticles");
                 break;
             case 'other':
-                ajaxCall("msnbc.com", "{{ topic }}", "leftWingArticles");
-                ajaxCall("thehill.com", "{{ topic }}", "centristArticles");
-                ajaxCall("foxnews.com", "{{ topic }}", "rightWingArticles")       
+                for (let l = 0; l < supportLiberal.length; l++) {
+                    ajaxCall(supportLiberal[l], "{{ topic }}", "leftWingArticles");
+                }
+                for (let c = 0; c < supportCentrist.length; c++) {
+                    ajaxCall(supportCentrist[c], "{{ topic }}", "centristArticles");
+                }
+                for (let r = 0; r < supportConservative.length; r++) {
+                    ajaxCall(supportConservative[r], "{{ topic }}", "rightWingArticles");
+                }
                 break;
         }
         function ajaxCall(domain, title, location){

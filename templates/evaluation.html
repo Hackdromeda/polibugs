@@ -139,7 +139,7 @@
                 var cardImageElement = document.createElement('img');
                 console.log(picUrl);
 
-                if ((picUrl.substring(0, 1) == '/' || picUrl.substring(0, 4) != 'http') && picUrl.substring(0,2) != "//") {
+                if ((picUrl.substring(0, 1) == '/' || picUrl.substring(0, 4) != 'http')) {
                     picUrl =  "{{url_for('static', filename='newspaper.png')}}";
                 }
 

@@ -87,6 +87,7 @@
                 var description = data.articles[i].description;
                 var artUrl = data.articles[i].url;
                 var picUrl = data.articles[i].urlToImage;
+                var source = data.articles[i].source.name;
                 /*var authorElement = document.createElement('h4');
                 authorElement.innerText = 'Author: ' + author;
                 var titleElement = document.createElement('a');
@@ -107,9 +108,9 @@
                 var cardBodyTitleElement = document.createElement('h5');
                 cardBodyTitleElement.className = 'card-title';
                 cardBodyTitleElement.innerText = title;
-                /*var cardBodySourceElement = document.createElement('p');
+                var cardBodySourceElement = document.createElement('p');
                 cardBodySourceElement.className = 'card-text';
-                cardBodySourceElement.innerText = */
+                cardBodySourceElement.innerText = '(source: ' + source + ')';
                 var cardBodyDescription = document.createElement('p');
                 cardBodyDescription.className = 'card-text';
                 cardBodyDescription.innerText = description;
@@ -118,14 +119,14 @@
                 visitArticleButtonElement.href = artUrl;
                 visitArticleButtonElement.innerText = 'Visit Article';
                 cardBodyElement.appendChild(cardBodyTitleElement);
-                //cardBodyElement.appendChild(cardBodySourceElement);
+                cardBodyElement.appendChild(cardBodySourceElement);
                 cardBodyElement.appendChild(cardBodyDescription);
                 cardBodyElement.appendChild(visitArticleButtonElement);
                 cardElement.appendChild(cardBodyElement);
 
                 document.getElementById(location).appendChild(cardElement);
 
-               /* document.getElementById(location).append(titleElement);
+                /*document.getElementById(location).append(titleElement);
                 document.getElementById(location).append(authorElement);
                 document.getElementById(location).append(descriptionElement);*/
 

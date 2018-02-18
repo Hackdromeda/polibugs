@@ -36,7 +36,7 @@
         switch(websiteLean) {
             case 'conservative':
                 ajaxCall("wsj.com", "{{ topic }}", "leftWingArticles");
-                ajaxCall("apnews.com", "{{ topic }}", "centristArticles");
+                ajaxCall("thehill.com", "{{ topic }}", "centristArticles");
                 yourArt("rightWingArticles", "{{ topic }}")
                 ajaxCall(yourWebsiteAddress, yourTitle, "rightWingArticles")
                 break;
@@ -47,14 +47,14 @@
                 //yourArt("centristArticles", "{{ topic }}")  
                 break;
             case 'liberal':
-                ajaxCall("apnews.com", "{{ topic }}", "centristArticles");
+                ajaxCall("thehill.com", "{{ topic }}", "centristArticles");
                 ajaxCall("foxnews.com", "{{ topic }}", "rightWingArticles")
                 ajaxCall("{{ websiteAddress }}", "{{ title }}", "leftWingArticles")
                 //yourArt("leftWingArticles", "{{ topic }}")          
                 break;
             case 'other':
                 ajaxCall("msnbc.com", "{{ topic }}", "leftWingArticles");
-                ajaxCall("apnews.com", "{{ topic }}", "centristArticles");
+                ajaxCall("thehill.com", "{{ topic }}", "centristArticles");
                 ajaxCall("foxnews.com", "{{ topic }}", "rightWingArticles")       
                 break;
 

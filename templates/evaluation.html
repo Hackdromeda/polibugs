@@ -30,34 +30,41 @@
         </div>
     </div>
     <script>
-        var websiteLean = "{{ websiteLean }}";
-        var yourTitle = "{{ title }}"
+var websiteLean = "{{ websiteLean }}";
+        var yourTitle = "{{ title }}";
         var yourWebsiteAddress = extractRootDomain("{{ websiteAddress }}");
+        var supportConservative = ['foxnews.com', 'dailymail.com', 'breitbart.com'];
+        var supportLiberal = ['abcnews.go.com', 'huffingtonpost.com', 'timesofindia.indiatimes.com', 'axios.com', 'cnn.com', 'buzzfeed.com', 'cbc.ca', 'usatoday.com', 'theguardian.co.uk', 'aljazeera.com', 'wsj.com', 'politico.com', 'bloomberg.com', 'wp.com', 'nyt.com', 'wired.com', 'news.vice.com', 'cbsnews.com', 'msnbc.com', 'bbcnews.com', 'time.com', 'nbcnews.com'];
+        var supportCentrist = ['engadget.com', 'espn.com', 'techradar.com', 'businessinsider.com', 'theeconomist.com', 'thehill.com', 'ign.com', 'theglobeandmail.com', 'telegraph.co.uk', 'techcrunch.com', 'mashable.com', 'nationalgeographic.com', 'fortune.com', 'foxsports.com', 'reuters.com'];
+   
         switch(websiteLean) {
             case 'conservative':
-                ajaxCall("wsj.com", "{{ topic }}", "leftWingArticles");
-                ajaxCall("thehill.com", "{{ topic }}", "centristArticles");
-                yourArt("rightWingArticles", "{{ topic }}")
-                ajaxCall(yourWebsiteAddress, yourTitle, "rightWingArticles")
+                for (var l = 0; l < supportLiberal.length; l++) {
+                    ajaxCall(supportLiberal[l], "{{ topic }}", "leftWingArticles");
+                }
+                for (var c = 0; c < supportCentrist.length; c++) {
+                    ajaxCall(supportCentrist[c], "{{ topic }}", "centristArticles");
+                }
+                yourArt("rightWingArticles", "{{ topic }}");
+                ajaxCall(yourWebsiteAddress, yourTitle, "rightWingArticles");
                 break;
             case 'centrist':
                 ajaxCall("msnbc.com", "{{ topic }}", "leftWingArticles");
-                ajaxCall("foxnews.com", "{{ topic }}", "rightWingArticles") 
-                ajaxCall("{{ websiteAddress }}", "{{ title }}", "centristArticles")
-                //yourArt("centristArticles", "{{ topic }}")  
+                ajaxCall("foxnews.com", "{{ topic }}", "rightWingArticles"); 
+                yourArt("centristArticles", "{{ topic }}")
+                ajaxCall("{{ websiteAddress }}", "{{ title }}", "centristArticles"); 
                 break;
             case 'liberal':
                 ajaxCall("thehill.com", "{{ topic }}", "centristArticles");
-                ajaxCall("foxnews.com", "{{ topic }}", "rightWingArticles")
-                ajaxCall("{{ websiteAddress }}", "{{ title }}", "leftWingArticles")
-                //yourArt("leftWingArticles", "{{ topic }}")          
+                ajaxCall("foxnews.com", "{{ topic }}", "rightWingArticles");
+                yourArt("leftWingArticles", "{{ topic }}")  
+                ajaxCall("{{ websiteAddress }}", "{{ title }}", "leftWingArticles");        
                 break;
             case 'other':
                 ajaxCall("msnbc.com", "{{ topic }}", "leftWingArticles");
                 ajaxCall("thehill.com", "{{ topic }}", "centristArticles");
                 ajaxCall("foxnews.com", "{{ topic }}", "rightWingArticles")       
                 break;
-
         }
         function ajaxCall(domain, title, location){
             $.ajax({
@@ -100,8 +107,16 @@
                 cardElement.className = 'card';
                 cardElement.style = "margin-bottom: 20px;"
                 var cardImageElement = document.createElement('img');
+                console.log(picUrl);
+
+                if ((picUrl.substring(0, 1) == '/' || picUrl.substring(0, 4) != 'http') && picUrl.substring(0,2) != "//") {
+                    picUrl =  "{{url_for('static', filename='newspaper.png')}}";
+                }
+
                 cardImageElement.src = picUrl;
                 cardImageElement.className = 'card-img-top';
+                cardImageElement.onError = 'imgError(this)';
+                cardImageElement.setAttribute('id', 'articleImage'); //NEW ADDITION!
                 cardElement.appendChild(cardImageElement);
                 var cardBodyElement = document.createElement('div');
                 cardBodyElement.className = 'card-body';

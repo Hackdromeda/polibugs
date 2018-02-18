@@ -1,17 +1,34 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, json
 from lxml import html
 import requests
+import http.client
+import urllib.request
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    requests.encoding = 'ISO-8859-1'
+
+    conservativeNewsSources = ['foxnews.com', 'newyorkpost', 'dailymail.com', 'infowars.com', 'forbes.com', 'nationalreview.com', 'wnd.com', 'townhall.com', 'breitbart.com']
+    liberalNewsSources = ['abcnews.go.com', 'usatoday.com', 'latimes.com', 'wsj', 'politico.com', 'telemundo.com', 'bloomberg.com', 'wp.com', 'nyt.com', 'theatlantic.com', 'wired.com', 'news.vice.com', 'reuters.com', 'cbsnews.com', 'msnbc.com', 'bbcnews.com', 'time.com', 'nbcnews.com']
+    centristNewsSources = ['c-span', 'upi', 'ap.org', 'apnews.com', 'upi', 'thehill.com', 'npr.org', 'militarytimes.com']
+    
     if request.method == 'GET':
         return render_template('index.html')
     elif request.method == 'POST':
         websiteAddress = str(request.form['websiteAddress'])
-        if websiteAddress[0:7] == 'http://':
+        topic = str(request.form['topic'])
+        websiteLean = 'unknown'
+        if any(x in websiteAddress.lower() for x in conservativeNewsSources):
+            websiteLean = 'conservative'
+        elif any(x in websiteAddress.lower() for x in liberalNewsSources):
+            websiteLean = 'liberal'
+        elif any(x in websiteAddress.lower() for x in centristNewsSources):
+            websiteLean = 'centrist'     
+        else:
+            websiteLean = 'other'
+
+        """if websiteAddress[0:7] == 'http://':
             page = requests.get(websiteAddress)
         elif websiteAddress[0:8] == 'https://':
             page = requests.get(websiteAddress)
@@ -26,12 +43,7 @@ def index():
         title = title.replace('"]', '')
         title = title.replace("',", '')
         title = title.replace("'", '')
-        paragraphs = str(tree.xpath('//p/text()'))
-        paragraphs = paragraphs.replace("['", '')
-        paragraphs = paragraphs.replace('["', '')
-        paragraphs = paragraphs.replace("']", '')
-        paragraphs = paragraphs.replace('"]', '')
-        paragraphs = paragraphs.replace("',", '')
-        paragraphs = paragraphs.replace("'", '')
-        
-        return render_template('evaluation.html', websiteAddress=paragraphs)
+        title = title.replace(' ', '%20')
+        title = title.replace('|', '%20')"""
+
+        return render_template('evaluation.html', topic=topic, websiteLean=websiteLean)

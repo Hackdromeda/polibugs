@@ -29,35 +29,51 @@
     </div>
     <script>
         var websiteLean = "{{ websiteLean }}";
-        var title = "{{ topic }}";
-        var domain = "";
         switch(websiteLean) {
             case 'conservative':
-                domain = 'wsj.com'
+                ajaxCall("wsj.com", "{{ topic }}", "leftWingArticles");
+                ajaxCall("apnews.com", "{{ topic }}", "centristArticles");
+                yourArt("rightWingArticles", "{{ topic }}")
                 break;
             case 'centrist':
-                domain = 'wsj.com'
+                ajaxCall("msnbc.com", "{{ topic }}", "leftWingArticles");
+                ajaxCall("foxnews.com", "{{ topic }}", "rightWingArticles")   
                 break;
             case 'liberal':
-                domain = 'wsj.com'          
+                ajaxCall("apnews.com", "{{ topic }}", "centristArticles");
+                ajaxCall("foxnews.com", "{{ topic }}", "rightWingArticles")         
                 break;
-        }
-        $.ajax({
-            url:
-                "https://newsapi.org/v2/everything?q=" + title + "&domains=" + domain + "&apiKey=707cdb388f3c4b2da50571fe30569538&language=en",
-            method: "GET",
-            error: function() {
-                console.log("Error!");
-            },
-            success: function(data) {
-                processData(data);
-            }
-        });
+            case 'other':
+                ajaxCall("msnbc.com", "{{ topic }}", "leftWingArticles");
+                ajaxCall("apnews.com", "{{ topic }}", "centristArticles");
+                ajaxCall("foxnews.com", "{{ topic }}", "rightWingArticles")       
+                break;
 
-        function processData(data) {
+        }
+        function ajaxCall(domain, title, location){
+            $.ajax({
+                url:
+                    "https://newsapi.org/v2/everything?q=" + title + "&domains=" + domain + "&apiKey=707cdb388f3c4b2da50571fe30569538&language=en",
+                method: "GET",
+                crossDomain: true,
+                error: function() {
+                    console.log("Error!");
+                },
+                success: function(data) {
+                    processData(data, location);
+                }
+        });
+        }
+
+        function processData(data, location) {
             var articleItems = [];
 
-            for (var i = 0; i < 2; i++) {
+            var x = 2;
+            if(data.articles.length < 2){
+                x =  data.articles.length;
+            }
+
+            for (var i = 0; i < x; i++) {
                 var author = data.articles[i].author;
                 var title = data.articles[i].title;
                 var description = data.articles[i].description;
@@ -66,16 +82,22 @@
                 var authorElement = document.createElement('h3');
                 authorElement.innerText = 'Author: ' + author;
                 var titleElement = document.createElement('a');
-                titleElement.innerText = 'Title: ' + title;
+                titleElement.innerText = title;
                 titleElement.href = artUrl;
                 var descriptionElement = document.createElement('h3');
                 descriptionElement.innerText = 'Description: ' + description;
-                document.getElementById('leftWingArticles').append(titleElement);
-                document.getElementById('leftWingArticles').append(authorElement);
-                document.getElementById('leftWingArticles').append(descriptionElement);
+                document.getElementById(location).append(titleElement);
+                document.getElementById(location).append(authorElement);
+                document.getElementById(location).append(descriptionElement);
 
                 console.log(artUrl);
             }
+        }
+        function yourArt(location, title){
+            var yourElement = document.createElement('h3');
+            yourElement.className = 'lead';
+            yourElement.innerText = 'Your article on: ' + title;
+            document.getElementById(location).append(yourElement);
         }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

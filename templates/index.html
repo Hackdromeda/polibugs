@@ -24,12 +24,54 @@
                     <div class="form-group">
                         <input class="form-control" name="websiteAddress" placeholder="Enter news article URL">
                     </div>
-                    <button type="submit" class="btn btn-light" style="color: #311B92;">Balance</button>
+                    <button type="submit" class="btn btn-light" style="color: #311B92; margin-bottom: 20px;">Balance</button>
                 </form>
             </div>
             <div class="col"></div>
         </div>
     </div>
+
+    <div class="jumbotron jumbotron-fluid" style="background-color: #ffffff; text-align: center;">
+        <h3>Recently Evaluated Articles</h3>
+        <div id="recentArticlesList"></div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-messaging.js"></script>
+
+    <script>
+        var config = {
+          apiKey: "AIzaSyAtc5KoFfGJEi7JsL2DbLKJ_TMw7MqFXOQ",
+          authDomain: "polibugs-project.firebaseapp.com",
+          databaseURL: "https://polibugs-project.firebaseio.com",
+          projectId: "polibugs-project",
+          storageBucket: "",
+          messagingSenderId: "899329781122"
+        };
+        firebase.initializeApp(config);
+
+        var database = firebase.database();
+
+        function writeArticlesData(articleId) {
+            firebase.database().ref('articles/').set({
+                article: articleId
+            });
+        }
+
+        function readArticlesData() {
+            firebase.database().ref('/articles/').once('value').then(function(snapshot) {
+                var articleListItem = document.createElement('a');
+                articleListItem.href = '' + snapshot.val().article;
+                articleListItem.innerText = '' + snapshot.val().article;
+                document.getElementById('recentArticlesList').appendChild(articleListItem);
+            });
+        }
+        readArticlesData();
+      </script>
 
     <script>
             var jumbotronTitle = document.getElementById('jumbotronTitleEnding');

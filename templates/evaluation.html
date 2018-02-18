@@ -65,9 +65,14 @@
                 var picUrl = data.articles[i].urlToImage;
                 var authorElement = document.createElement('h3');
                 authorElement.innerText = 'Author: ' + author;
-                var titleElement = document.createElement('h3');
+                var titleElement = document.createElement('a');
                 titleElement.innerText = 'Title: ' + title;
+                titleElement.href = artUrl;
+                var descriptionElement = document.createElement('h3');
+                descriptionElement.innerText = 'Description: ' + description;
+                document.getElementById('leftWingArticles').append(titleElement);
                 document.getElementById('leftWingArticles').append(authorElement);
+                document.getElementById('leftWingArticles').append(descriptionElement);
 
                 console.log(artUrl);
             }

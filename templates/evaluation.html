@@ -107,6 +107,9 @@
                 var cardBodyTitleElement = document.createElement('h5');
                 cardBodyTitleElement.className = 'card-title';
                 cardBodyTitleElement.innerText = title;
+                /*var cardBodySourceElement = document.createElement('p');
+                cardBodySourceElement.className = 'card-text';
+                cardBodySourceElement.innerText = */
                 var cardBodyDescription = document.createElement('p');
                 cardBodyDescription.className = 'card-text';
                 cardBodyDescription.innerText = description;
@@ -115,6 +118,7 @@
                 visitArticleButtonElement.href = artUrl;
                 visitArticleButtonElement.innerText = 'Visit Article';
                 cardBodyElement.appendChild(cardBodyTitleElement);
+                //cardBodyElement.appendChild(cardBodySourceElement);
                 cardBodyElement.appendChild(cardBodyDescription);
                 cardBodyElement.appendChild(visitArticleButtonElement);
                 cardElement.appendChild(cardBodyElement);

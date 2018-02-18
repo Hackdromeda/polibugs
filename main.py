@@ -10,8 +10,8 @@ app = Flask(__name__)
 def index():
 
     conservativeNewsSources = ['foxnews.com', 'newyorkpost', 'dailymail.com', 'infowars.com', 'forbes.com', 'nationalreview.com', 'wnd.com', 'townhall.com', 'breitbart.com']
-    liberalNewsSources = ['abcnews.go.com', 'usatoday.com', 'latimes.com', 'wsj', 'politico.com', 'telemundo.com', 'bloomberg.com', 'wp.com', 'nyt.com', 'theatlantic.com', 'wired.com', 'news.vice.com', 'reuters.com', 'cbsnews.com', 'msnbc.com', 'bbcnews.com', 'time.com', 'nbcnews.com']
-    centristNewsSources = ['c-span', 'apnews.com', 'upi', 'thehill.com', 'npr.org', 'militarytimes.com']
+    liberalNewsSources = ['abcnews.go.com', 'usatoday.com', 'latimes.com', 'wsj', 'politico.com', 'telemundo.com', 'bloomberg.com', 'wp.com', 'nyt.com', 'theatlantic.com', 'wired.com', 'news.vice.com', 'cbsnews.com', 'msnbc.com', 'bbcnews.com', 'time.com', 'nbcnews.com']
+    centristNewsSources = ['c-span', 'apnews.com', 'upi', 'thehill.com', 'npr.org', 'reuters.com', 'militarytimes.com']
     
     if request.method == 'GET':
         return render_template('index.html')

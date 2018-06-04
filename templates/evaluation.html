@@ -3,16 +3,32 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <title>Polibugs</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="/static/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/static/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/static/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/static/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/static/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/static/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/static/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/static/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/static/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/static/favicons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/static/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
   </head>
   <body>
     <nav class="navbar" style="background-color: #311B92; color: #ffffff;"><span></span><a class="navbar-brand mb-0 h1" href="{{ url_for('index') }}">Polibugs</a><span></span></nav>
-    <div class="jumbotron jumbotron-fluid" style="background-image: url('https://cdn.cnn.com/cnnnext/dam/assets/170119164810-politics-2017-background---dark-full-169.jpg'); text-align: center;">
+    <div class="jumbotron jumbotron-fluid" style="background-image: url('/static/politics-bg.jpg'); text-align: center;">
         <h1 class="display-3" id="jumbotronTitle" style="color: #E91E63;"><strong>Departisanizing</strong></h1>
         <p class="lead" style="color: #e0e0e0">Mission Statement: We strive to provide a nonpartisan tool to provide balanced viewpoints on the news.</p>
         <hr />
@@ -160,7 +176,7 @@
                 cardImageElement.src = picUrl;
                 cardImageElement.className = 'card-img-top';
                 cardImageElement.onError = 'imgError(this)';
-                cardImageElement.setAttribute('id', 'articleImage'); //NEW ADDITION!
+                cardImageElement.setAttribute('id', 'articleImage');
                 cardElement.appendChild(cardImageElement);
                 var cardBodyElement = document.createElement('div');
                 cardBodyElement.className = 'card-body';
@@ -176,6 +192,7 @@
                 var visitArticleButtonElement = document.createElement('a');
                 visitArticleButtonElement.className = 'btn btn-primary';
                 visitArticleButtonElement.href = artUrl;
+                visitArticleButtonElement.setAttribute("target", "_blank");
                 visitArticleButtonElement.innerText = 'Visit Article';
                 cardBodyElement.appendChild(cardBodyTitleElement);
                 cardBodyElement.appendChild(cardBodySourceElement);

@@ -7,6 +7,8 @@ winner of [Best in Class Application (1st Place)](https://devpost.com/software/a
 
 website live at [https://polibugs.tech/](https://polibugs.tech/)
 
+favicon by [adiante apps](https://www.iconfinder.com/icons/287491/blog_feed_news_newspaper_rss_icon)
+
 ### About  
 ###### Front-end
 + Polibugs is deployed and distributed using PythonAnywhere, eventually to be transitioned to AWS EC2, S3, or CloudFront

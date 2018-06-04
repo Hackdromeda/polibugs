@@ -27,27 +27,28 @@
   <body style="background-image: url('/static/banner.jpg');">
     <nav class="navbar" style="background-color: #311B92; color: #ffffff;"><span></span><a class="navbar-brand mb-0 h1" href="{{ url_for('index') }}">Polibugs</a><span></span></nav>
     <div class="jumbotron jumbotron-fluid" style="background-color: #ffffff; text-align: center;">
-        <h1 class="display-4">News at <span style="color: #004D40"><strong id="jumbotronTitleEnding">Equilibrium.</strong></span></h1>
+        <h1 class="display-4">News at <span style="color: #00b33c"><strong id="jumbotronTitleEnding">Equilibrium.</strong></span></h1>
         <p class="lead">Mission Statement: We strive to provide a nonpartisan tool to provide balanced viewpoints on the news.</p>
         <p>Powered by News API</p>
     </div>
-    <div class="row">
-        <div class="col-md-4 col-sm-2"></div>
-        <div class="col-md-4 col-sm-8">
-            <div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
                 <form action="{{url_for('index')}}" method="POST">
                     <div class="form-group">
-                        <input class="form-control" name="topic" placeholder="Enter topic">
+                        <input class="form-control" name="topic" placeholder="Enter topic" style="width: auto;">
                     </div>
                     <div class="form-group">
-                        <input class="form-control" name="websiteAddress" placeholder="Enter news article URL">
+                        <input class="form-control" name="websiteAddress" placeholder="Enter news article URL" style="width: auto;">
                     </div>
                     <button type="submit" class="btn btn-light" style="color: #311B92; margin-bottom: 20px;">Balance</button>
                 </form>
             </div>
+            <div class="col"></div>
         </div>
-        <div class="col-md-4 col-sm-2"></div>
     </div>
+
     <div class="jumbotron jumbotron-fluid" style="background-color: #ffffff; text-align: center;">
         <h3>Recently Evaluated Articles</h3>
         <div id="recentArticlesList"></div>
@@ -70,15 +71,12 @@
           messagingSenderId: "899329781122"
         };
         firebase.initializeApp(config);
-
         var database = firebase.database();
-
         function writeArticlesData(articleId) {
             firebase.database().ref('articles/').set({
                 article: articleId
             });
         }
-
         function readArticlesData() {
             firebase.database().ref('/articles/').once('value').then(function(snapshot) {
                 var articleListItem = document.createElement('a');
@@ -88,7 +86,7 @@
             });
         }
         readArticlesData();
-      </script>
+    </script>
 
     <script>
             var jumbotronTitle = document.getElementById('jumbotronTitleEnding');
@@ -96,27 +94,27 @@
                 switch (jumbotronTitleEnding.textContent) {
                     case "Equilibrium.":
                         jumbotronTitleEnding.textContent = "Balance.";
-                        jumbotronTitleEnding.style.color = "#004D40";
+                        jumbotronTitleEnding.style.color = "#00b33c";
                         break;
                     case "Balance.":
                         jumbotronTitleEnding.textContent = "Symmetry.";
-                        jumbotronTitleEnding.style.color = "#004D40";
+                        jumbotronTitleEnding.style.color = "#00b33c";
                         break;
                     case "Symmetry.":
                         jumbotronTitleEnding.textContent = "Equipoise.";
-                        jumbotronTitleEnding.style.color = "#004D40";
+                        jumbotronTitleEnding.style.color = "#00b33c";
                         break;
                     case "Equipoise.":
                         jumbotronTitleEnding.textContent = "Parity.";
-                        jumbotronTitleEnding.style.color = "#004D40";
+                        jumbotronTitleEnding.style.color = "#00b33c";
                         break;
                     case "Parity.":
                         jumbotronTitleEnding.textContent = "Equilibrium.";
-                        jumbotronTitleEnding.style.color = "#004D40";
+                        jumbotronTitleEnding.style.color = "#00b33c";
                         break;
                 }
             }, 4000)
-        </script>
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

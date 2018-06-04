@@ -30,10 +30,10 @@
         <h1 class="display-4">News at <span style="color: #004D40"><strong id="jumbotronTitleEnding">Equilibrium.</strong></span></h1>
         <p class="lead">Mission Statement: We strive to provide a nonpartisan tool to provide balanced viewpoints on the news.</p>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col"></div>
-            <div class="col">
+    <div class="row">
+        <div class="col-md-4 col-sm-2"></div>
+        <div class="col-md-4 col-sm-8">
+            <div class="container">
                 <form action="{{url_for('index')}}" method="POST">
                     <div class="form-group">
                         <input class="form-control" name="topic" placeholder="Enter topic">
@@ -44,8 +44,8 @@
                     <button type="submit" class="btn btn-light" style="color: #311B92; margin-bottom: 20px;">Balance</button>
                 </form>
             </div>
-            <div class="col"></div>
         </div>
+        <div class="col-md-4 col-sm-2"></div>
     </div>
 
     <div class="jumbotron jumbotron-fluid" style="background-color: #ffffff; text-align: center;">

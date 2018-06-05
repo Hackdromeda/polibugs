@@ -11,7 +11,8 @@ favicon by [adiante apps](https://www.iconfinder.com/icons/287491/blog_feed_news
 
 ### About  
 ###### Front-end
-+ Polibugs is deployed and distributed using AWS EC2
++ Polibugs is deployed and distributed using Amazon Web Services Elastic Compute Cloud (AWS EC2)
+  + AWS Elastic Beanstalk is used to deploy the Docker container onto load balanced instances
   + the site is distributed over HTTPS using a CloudFlare trusted SSL certificate
 + Polibugs uses the Bootstrap front-end framework
 ###### Back-end

@@ -51,7 +51,7 @@
                 <label for="URL" class="col-sm-2 col-form-label">Article or News Site URL</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="article" name="websiteAddress" placeholder="Enter news article URL">
-                    <small id="formHelp" class="form-text text-muted">You may leave the article url values blank to get news from a balanced variety of sources.</small>
+                    <small id="formHelp" class="form-text text-muted">You may leave the article URL value blank to get news from a balanced variety of sources.</small>
                 </div>
                 </div>
                 <div class="form-action">
@@ -96,6 +96,7 @@
             firebase.database().ref('/articles/').once('value').then(function(snapshot) {
                 var articleListItem = document.createElement('a');
                 articleListItem.href = '' + snapshot.val().article;
+                articleListItem.setAttribute("target", "_blank");
                 articleListItem.innerText = '' + snapshot.val().article;
                 document.getElementById('recentArticlesList').appendChild(articleListItem);
             });

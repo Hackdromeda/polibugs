@@ -29,26 +29,7 @@ def index():
             websiteLean = 'other'
 
         title = ''
-        if "." not in websiteAddress:
-            title = 'none'
-        elif websiteAddress[0:7] == 'http://' or websiteAddress[0:8] == 'https://':
-            page = requests.get(websiteAddress)
-            tree = html.fromstring(page.content)
-            title = str(tree.xpath('//title/text()'))
-        else: 
-            websiteAddress = 'http://' + websiteAddress
-            page = requests.get(websiteAddress)
-            title = str(tree.xpath('//title/text()'))
-
-        title = title.replace("['", '')
-        title = title.replace('["', '')
-        title = title.replace("']", '')
-        title = title.replace('"]', '')
-        title = title.replace("',", '')
-        title = title.replace("'", '')
-        title = title.replace(' ', '%20')
-        title = title.replace('|', '%20')
-
+        
         return render_template('evaluation.html', topic=topic, websiteLean=websiteLean, title=title, websiteAddress=websiteAddress)
 
 app.run(debug=False, host='0.0.0.0')

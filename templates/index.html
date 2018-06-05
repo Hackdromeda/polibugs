@@ -39,18 +39,18 @@
         <p>How it Works: Polibugs will find the political bias of the news site you provide and balance your news diet by presenting information on the topic or today's news from sources with differing leaning.</p>
     </div>
     <div class="container">
-            <form>
+            <form action="{{url_for('index')}}" method="POST">
                 <div class="form-group row">
-                <label for="topic" class="col-sm-2 col-form-label">Article Topic</label>
+                <label for="topic" class="col-sm-2 col-form-label" style="color:#ffffff;">Article Topic</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="topic" name="topic" placeholder="Enter news article topic">
+                    <input class="form-control" name="topic" placeholder="Enter news article topic">
                     <small id="formHelp" class="form-text text-muted">You may leave the topic value blank to get today's top news.</small>
                 </div>
                 </div>
                 <div class="form-group row">
-                <label for="URL" class="col-sm-2 col-form-label">Article or News Site URL</label>
+                <label for="URL" class="col-sm-2 col-form-label" style="color:#ffffff;">Article or News Site URL</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="article" name="websiteAddress" placeholder="Enter news article URL">
+                    <input class="form-control" name="websiteAddress" placeholder="Enter news article URL">
                     <small id="formHelp" class="form-text text-muted">You may leave the article URL value blank to get news from a balanced variety of sources.</small>
                 </div>
                 </div>

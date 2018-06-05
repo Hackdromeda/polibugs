@@ -23,35 +23,50 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/static/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    <style>
+        .form-action {
+            margin: 0;
+            background-color: transparent;
+            text-align: center;
+        }
+    </style>
   </head>
   <body style="background-image: url('/static/banner.jpg');">
     <nav class="navbar" style="background-color: #311B92; color: #ffffff;"><span></span><a class="navbar-brand mb-0 h1" href="{{ url_for('index') }}">Polibugs</a><span></span></nav>
     <div class="jumbotron jumbotron-fluid" style="background-color: #ffffff; text-align: center;">
         <h1 class="display-4">News at <span style="color: #00b33c"><strong id="jumbotronTitleEnding">Equilibrium.</strong></span></h1>
         <p class="lead">Mission Statement: We strive to provide a nonpartisan tool to provide balanced viewpoints on the news.</p>
-        <p>Powered by News API</p>
+        <p>How it Works: Polibugs will find the political bias of the news site you provide and balance your news diet by presenting information on the topic or today's news from sources with differing leaning.</p>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="col"></div>
-            <div class="col">
-                <form action="{{url_for('index')}}" method="POST">
-                    <div class="form-group">
-                        <input class="form-control" name="topic" placeholder="Enter topic" style="width: auto;">
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" name="websiteAddress" placeholder="Enter news article URL" style="width: auto;">
-                    </div>
-                    <button type="submit" class="btn btn-light" style="color: #311B92; margin-bottom: 20px;">Balance</button>
-                </form>
-            </div>
-            <div class="col"></div>
-        </div>
+            <form>
+                <div class="form-group row">
+                <label for="topic" class="col-sm-2 col-form-label">Article Topic</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="topic" name="topic" placeholder="Enter news article topic">
+                    <small id="formHelp" class="form-text text-muted">You may leave the topic value blank to get today's top news.</small>
+                </div>
+                </div>
+                <div class="form-group row">
+                <label for="URL" class="col-sm-2 col-form-label">Article or News Site URL</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="article" name="websiteAddress" placeholder="Enter news article URL">
+                    <small id="formHelp" class="form-text text-muted">You may leave the article url values blank to get news from a balanced variety of sources.</small>
+                </div>
+                </div>
+                <div class="form-action">
+                    <button type="submit" class="btn btn-light" style="color: #311B92; margin-bottom: 20px; margin-top: 10px;">Balance</button>
+                </div>
+            </form>
     </div>
+
+
 
     <div class="jumbotron jumbotron-fluid" style="background-color: #ffffff; text-align: center;">
         <h3>Recently Evaluated Articles</h3>
         <div id="recentArticlesList"></div>
+        <br>
+        <p>Polibugs is powered by News API</p>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
